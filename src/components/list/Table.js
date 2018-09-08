@@ -1,7 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Table.css';
 
 const Table = (props) => {
+  const { currencies, renderChangePercent } = props;
+
   return (
     <table className="Table">
     <thead className="Table-head">
@@ -13,7 +16,7 @@ const Table = (props) => {
       </tr>    
     </thead>
     <tbody className="Table-body">
-    {props.currencies.map((currency) => (
+    {currencies.map((currency) => (
       <tr key={currency.id}>
         <td>
           <span className="Table-rank">{currency.rank}</span>
@@ -28,7 +31,7 @@ const Table = (props) => {
           {currency.marketCap}
         </td>
         <td>
-          {props.renderChangePercent(currency.percentChange24h)}
+          {renderChangePercent(currency.percentChange24h)}
         </td>
       </tr>
     ))}
@@ -36,5 +39,11 @@ const Table = (props) => {
   </table>
   );
 }
+
+// Test to make sure prop type is correct
+Table.propTypes = {
+  currencies: PropTypes.array.isRequired,
+  renderChangePercent: PropTypes.func.isRequired
+};
 
 export default Table;
