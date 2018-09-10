@@ -26,7 +26,7 @@ class List extends React.Component {
 
   fetchCurrencies() {
     this.setState({ loading: true });
-    
+
     const { page } = this.state;
 
     fetch(`${API_URL}/cryptocurrencies?page=${page}&perPage=20`)
@@ -45,21 +45,11 @@ class List extends React.Component {
           error: error.errorMessage,
           loading: false,
         });
-      });    
-  }
-
-  renderChangePercent(percent) {
-    if (percent > 0) {
-      return <span className="percent-raised">{percent}% &uarr;</span>
-    } else if (percent < 0) {
-      return <span className="percent-fallen">{percent}% &darr;</span>
-    } else {
-      return <span>{percent}</span>
-    }
+      });
   }
 
   handlePaginationClick(direction) {
-    let nextPage = this.state.page; 
+    let nextPage = this.state.page;
 
     nextPage = direction === 'next' ? nextPage + 1 : nextPage - 1;
     this.setState({
@@ -84,10 +74,9 @@ class List extends React.Component {
     }
 
     return (
-      <div> 
-        <Table 
-          currencies={currencies} 
-          renderChangePercent={this.renderChangePercent}
+      <div>
+        <Table
+          currencies={currencies}
         />
 
         <Pagination page={page} totalPages={totalPages} handlePaginationClick={this.handlePaginationClick} />
