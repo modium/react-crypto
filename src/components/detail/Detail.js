@@ -25,22 +25,24 @@ class Detail extends React.Component {
       loading: true,
     });
 
+    this.fetchCurrency(currencyId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // location URL is available as a prop
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      const newCurrencyId = nextProps.match.params.id;
+
+      this.fetchCurrency(newCurrencyId);
+    }
+  }
+
+  fetchCurrency(currencyId) {
     fetch(`${API_URL}/cryptocurrencies/${currencyId}`)
       .then(handleResponse)
       .then((currency) => {
         console.log(currency);
         this.setState({
-          // currency: {
-          //   id: currency.id,
-          //   marketCap: currency.marketCap,
-          //   name: currency.name,
-          //   percentChange24h: currency.percentChange24h,
-          //   price: currency.price,
-          //   rank: currency.rank,
-          //   symbol: currency.symbol,
-          //   totalSupply: currency.totalSupply,
-          //   volume24h: currency.volume24h,
-          // },
           currency,
           loading: false,
           error: null,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { handleResponse, renderChangePercent } from '../../helpers';
+import { renderChangePercent } from '../../helpers';
 import PropTypes from 'prop-types';
 import './Table.css';
 
